@@ -1,17 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled, { keyframes } from 'styled-components';
 import LogoIcon from '../img/logo.svg';
 import Wow from '../img/wow.svg';
 import UserIcon from '../img/user.png'
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 
 function Nav() {
 
-  const navDisplay = useSelector( (state) => state.navDisplay.displayValue );
+  const location = useLocation();
 
   const Header = styled.header`
-    display: ${navDisplay};
     position: fixed;
     top: 0;
     left: 0;
@@ -107,32 +105,35 @@ function Nav() {
     background-position: center;
  `
 
-  return (
-    <Header>
-      <NavContainer>
-        <Link to='/'><Logo /></Link>
-        <NavList>
-          <ul>
-            <li><Link to='/counseling'>요리 상담소</Link></li>
-            <li><Link to='/recipe-lab'>요리법 연구소</Link></li>
-            <li><Link to='/cooking'>요리해요</Link></li>
-            <li><Link to='/award'>맛있는 추억을 그리다</Link></li>
-            <li>
-              <Link to='/event'>
-                <WowIcon>
-                  <span>
-                    <img src={Wow}></img>
-                  </span>
-                  <span>이벤트</span>
-                </WowIcon>
-              </Link>
-            </li>
-          </ul>
-        </NavList>
-        <Link to='/login'><User /></Link>
-      </NavContainer>
-    </Header>
-  )
+  if( location.pathname !== ('/login' && '/join') ){
+    return (
+      <Header>
+        <NavContainer>
+          <Link to='/'><Logo /></Link>
+          <NavList>
+            <ul>
+              <li><Link to='/counseling'>요리 상담소</Link></li>
+              <li><Link to='/recipe-lab'>요리법 연구소</Link></li>
+              <li><Link to='/cooking'>요리해요</Link></li>
+              <li><Link to='/award'>맛있는 추억을 그리다</Link></li>
+              <li>
+                <Link to='/event'>
+                  <WowIcon>
+                    <span>
+                      <img src={Wow}></img>
+                    </span>
+                    <span>이벤트</span>
+                  </WowIcon>
+                </Link>
+              </li>
+            </ul>
+          </NavList>
+          <Link to='/login'><User /></Link>
+        </NavContainer>
+      </Header>
+    )
+  }
+  return null;
 }
 
 export default Nav;

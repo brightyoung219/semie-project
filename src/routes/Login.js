@@ -1,19 +1,10 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { changeDisplay } from '../store';
 import Sempio from '../img/sempio.svg';
 import Semie from '../img/logo.svg';
 import Kakao from '../img/kakao-talk.svg'
 
 function Login() {
-
-  const navDisplay = useSelector((state) => state.navDisplay.displayValue);
-  let dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(changeDisplay('none'));
-  }, []);
 
   const Header = styled.header`
     position: fixed;
